@@ -1,0 +1,16 @@
+.home__screen {
+  width: 100%;
+}
+
+.home__screenHero {
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7) url("../images/hero.jpg");
+  background-size: cover;
+  background-blend-mode: darken;
+}
+
+.test {
+  height: 200vh;
+  font-family: "Karla", sans-serif;
+}
