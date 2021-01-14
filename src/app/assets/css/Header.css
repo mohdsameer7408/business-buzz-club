@@ -12,6 +12,12 @@
   transition: all 0.5s ease;
 }
 
+.header__default {
+  position: sticky;
+  background-color: var(--primaryColor);
+  box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
 .header__backgroundChange {
   background-color: var(--primaryColor);
   box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.2);
@@ -46,6 +52,11 @@
   text-decoration: none;
   color: #888;
   transition: all 0.5s ease;
+}
+
+.header__rightLinkActive {
+  color: #fff;
+  /* border-bottom: 1px solid #fff; */
 }
 
 .header__rightLink:hover {
