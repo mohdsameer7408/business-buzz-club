@@ -1,0 +1,31 @@
+.about_container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+  /* background-color: #edccb8; */
+}
+
+.img_about {
+  width: 80%;
+  max-width: 381px;
+  height: 60vh;
+  max-height: 400px;
+  object-fit: cover;
+  margin: 40px;
+}
+
+.left {
+  height: 400;
+  width: 30%;
+  font-size: 21px;
+  font-weight: bold;
+  margin: 40px;
+}
+
+@media only screen and (max-width: 740px) {
+  .left {
+    width: 80%;
+  }
+}
