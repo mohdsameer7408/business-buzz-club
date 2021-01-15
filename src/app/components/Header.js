@@ -35,11 +35,10 @@ function Header() {
     setIsNavOpened((prevState) => !prevState);
   };
 
-  const headerClasses = `${
+  const headerClasses =
     pathname === "/"
       ? `header ${headerColor && "header__backgroundChange"}`
-      : "header header__default"
-  }`;
+      : "header header__default";
 
   const getLinkClasses = (linkPath) =>
     pathname === linkPath
@@ -53,7 +52,7 @@ function Header() {
       </div>
       <Link to="/" className="header__rightLink">
         <div className="header__left">
-          <img src={Logo} alt="" className="header__logo" />
+          <img src={Logo} alt="bbc" className="header__logo" />
           <h3 className="header__title">Business Buzz Club</h3>
         </div>
       </Link>

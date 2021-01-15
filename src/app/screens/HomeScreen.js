@@ -3,6 +3,7 @@ import React from "react";
 import "../assets/css/HomeScreen.css";
 import About from "../components/About";
 import Footer from "../components/Footer";
+import Gallery from "../components/Gallery";
 
 function HomeScreen() {
   return (
@@ -13,6 +14,7 @@ function HomeScreen() {
           <h1 className="test"> WITH FUN" </h1>
         </div>
       </div>
+      <Gallery />
       <About />
       <Footer />
     </div>
