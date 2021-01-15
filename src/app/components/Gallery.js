@@ -7,7 +7,7 @@ function Gallery() {
 
   useEffect(() => {
     const addMargin = () => {
-      if (window.scrollY > 600 && window.scrollY < 1500) {
+      if (window.scrollY > 500 && window.scrollY < 1500) {
         setIsGalleryReached(true);
       } else if (window.scrollY > 1500) {
         setIsGalleryReached(false);
