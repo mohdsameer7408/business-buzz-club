@@ -1,0 +1,10 @@
+.events__screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
+.events__title {
+  font-size: 35px;
+  font-family: "Fredoka";
+}

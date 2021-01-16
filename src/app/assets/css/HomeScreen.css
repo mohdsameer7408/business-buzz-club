@@ -1,6 +1,5 @@
 .home__screen {
   width: 100%;
-  font-family: "Karla", sans-serif;
 }
 
 .home__screenHero {
@@ -9,8 +8,8 @@
   height: 100vh;
   /* background: rgba(0, 0, 0, 0.7) url("../images/hero.jpg"); */
   background: rgba(0, 0, 0, 0.7)
-    url("https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1050&q=80");
-  background-size: cover;
+    url("https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1050&q=80")
+    center/cover fixed no-repeat;
   background-blend-mode: darken;
 }
 
@@ -18,12 +17,34 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 53%;
-  height: 80%;
-  padding-left: 10%;
+  width: 100%;
+  height: 100%;
   font-size: 53px;
   font-family: "Fredoka One", cursive;
   color: #fff;
+}
+
+.club__description > h1 {
+  margin-left: 10%;
+}
+
+.club__description > a {
+  text-decoration: none;
+  display: flex;
+  align-self: center;
+  margin-top: 150px;
+}
+
+.hero__button {
+  padding: 8px 20px !important;
+  border: 2px solid #fff !important;
+  color: #fff !important;
+  transition: all 0.5s ease-in-out;
+}
+
+.hero__button:hover {
+  color: #000 !important;
+  background: #fff !important;
 }
 
 @media only screen and (max-width: 1095px) {

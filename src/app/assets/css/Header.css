@@ -16,12 +16,14 @@
 .header__default {
   position: sticky;
   background-color: var(--primaryColor);
-  box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 6px 10px 0 rgba(0, 0, 0, 0.1),
+    2px 6px 10px 0 rgba(0, 0, 0, 0.2);
 }
 
 .header__backgroundChange {
   background-color: var(--primaryColor);
-  box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 6px 10px 0 rgba(0, 0, 0, 0.1),
+    2px 6px 10px 0 rgba(0, 0, 0, 0.2);
 }
 
 .header__left {

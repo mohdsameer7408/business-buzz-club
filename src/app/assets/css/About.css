@@ -1,3 +1,7 @@
+.about_container:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
 .about_container {
   display: flex;
   justify-content: space-evenly;

@@ -1,12 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Karla:wght@300&family=Fredoka+One&display=swap");
 
-/* @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap'); */
-
 * {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
   --primaryColor: #033649;
   --secondaryColor: #263a44;
-  scroll-behavior: smooth;
+  --footerColor: #1d2b42;
+  --footerCopyColor: #031634;
 }
 
 body {
