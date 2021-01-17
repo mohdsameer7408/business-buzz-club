@@ -1,0 +1,134 @@
+.register__screen {
+  width: 100%;
+  min-height: calc(100vh - 60px);
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right top, #2d405a, #53778a);
+}
+
+.form__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.3)
+  );
+  border-radius: 2rem;
+  backdrop-filter: blur(1rem);
+  overflow: hidden;
+  z-index: 4;
+}
+
+.circle1,
+.circle2 {
+  width: 10rem;
+  height: 10rem;
+  border-radius: 2rem;
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0.2)
+  );
+  position: absolute;
+}
+
+.circle1 {
+  bottom: 1%;
+  left: 18%;
+}
+
+.circle2 {
+  top: 10%;
+  right: 18%;
+}
+
+.form__left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 350px;
+  height: 655px;
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0)
+  );
+}
+
+.login__formLeft {
+  height: 500px;
+}
+
+.form__image {
+  width: 80%;
+  object-fit: contain;
+}
+
+.form__right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 400px;
+  padding: 30px 20px;
+}
+
+.form__right > form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.signup__heading {
+  margin-bottom: 20px;
+}
+
+.signup__heading > h1 {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.submit__button {
+  margin-top: 10px !important;
+  margin-left: 50px !important;
+  background-color: #263a44 !important;
+  color: white !important;
+  width: 50%;
+}
+
+.submit__button:hover {
+  background-color: #000 !important;
+}
+
+@media only screen and (max-width: 501px) {
+  .register__screen {
+    padding: 20px 5px;
+  }
+
+  .form__left,
+  .login__formLeft {
+    height: 350px;
+  }
+
+  .form__left,
+  .form__right,
+  .login__formLeft {
+    width: calc(100vw - 15px);
+  }
+}
+
+@media only screen and (min-width: 502px) and (max-width: 788px) {
+  .form__left,
+  .login__formLeft {
+    width: 100%;
+    height: 300px;
+  }
+
+  .form__image {
+    width: 40%;
+  }
+}

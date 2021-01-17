@@ -33,7 +33,7 @@ function Event() {
         <a href="https://meet.google.com" target="_blank" rel="noreferrer">
           Google Meet Url
         </a>
-        <Button className="register__now" disabled={false}>
+        <Button className="hero__button register__now" disabled={false}>
           Register Now
         </Button>
       </div>
@@ -42,4 +42,3 @@ function Event() {
 }
 
 export default Event;
-// https://picsum.photos/400/500

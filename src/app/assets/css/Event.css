@@ -8,6 +8,10 @@
   border-radius: 20px;
   padding: 60px 20px;
   overflow: hidden;
+  background: rgba(0, 0, 0, 0.7) url("https://picsum.photos/400/500")
+    center/cover fixed no-repeat;
+  background-blend-mode: darken;
+  color: #fff;
 }
 
 .event__poster,
@@ -50,26 +54,27 @@
 }
 
 .event__details > span {
-  color: #888;
+  color: #ccc;
   font-size: 16px;
   font-weight: bold;
 }
 
 .register__now {
   margin: 10px !important;
-  background-color: var(--footerCopyColor) !important;
+  padding: 0;
+  /* background-color: var(--footerCopyColor) !important;
   color: #fff !important;
-  transition: all 0.4s ease;
+  transition: all 0.4s ease; */
 }
 
-.register__now:hover {
+/* .register__now:hover {
   background-color: #000 !important;
-}
+} */
 
 .event__details > a {
   font-size: 15px;
-  color: var(--footerCopyColor);
   font-weight: bold;
+  color: #fff;
 }
 
 @media only screen and (max-width: 450px) {

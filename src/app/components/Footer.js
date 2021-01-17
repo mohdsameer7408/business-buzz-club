@@ -49,7 +49,7 @@ function Footer() {
             <li className="social_links">
               Like Our Facebook page
               <a
-                href="https://www.instagram.com/businessbuzzclub/"
+                href="https://www.facebook.com/businessbuzzclub/"
                 target="_blank"
                 rel="noreferrer"
               >

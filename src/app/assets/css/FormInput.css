@@ -1,0 +1,26 @@
+.input__container {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.label__field {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.field__container {
+  display: flex;
+}
+
+.input__field {
+  min-width: 250px;
+  padding: 5px;
+  border: none;
+  outline-width: 0;
+  border-bottom: 2px solid #033649;
+  background: transparent;
+}
+
+.password__eye {
+  margin-left: -22px;
+}
