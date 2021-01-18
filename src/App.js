@@ -9,6 +9,7 @@ import LoginScreen from "./app/screens/LoginScreen";
 import RegisterScreen from "./app/screens/RegisterScreen";
 import ProfileScreen from "./app/screens/ProfileScreen";
 import PrivateRoute from "./app/components/PrivateRoute";
+import ProtectedRoute from "./app/components/ProtectedRoute";
 
 function App() {
   return (
@@ -19,12 +20,12 @@ function App() {
           <PrivateRoute path="/profile">
             <ProfileScreen />
           </PrivateRoute>
-          <Route path="/login">
+          <ProtectedRoute path="/login">
             <LoginScreen />
-          </Route>
-          <Route path="/register">
+          </ProtectedRoute>
+          <ProtectedRoute path="/register">
             <RegisterScreen />
-          </Route>
+          </ProtectedRoute>
           <Route path="/events">
             <EventsScreen />
           </Route>

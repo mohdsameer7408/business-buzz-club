@@ -4,6 +4,11 @@ import { Button } from "@material-ui/core";
 import "../assets/css/Event.css";
 
 function Event() {
+  const enrollInEventHandler = (event) => {
+    event.preventDefault();
+    console.log("Enrolled");
+  };
+
   return (
     <div className="event">
       <div className="event__poster">
@@ -33,7 +38,11 @@ function Event() {
         <a href="https://meet.google.com" target="_blank" rel="noreferrer">
           Google Meet Url
         </a>
-        <Button className="hero__button register__now" disabled={false}>
+        <Button
+          className="hero__button register__now"
+          disabled={false}
+          onClick={enrollInEventHandler}
+        >
           Register Now
         </Button>
       </div>

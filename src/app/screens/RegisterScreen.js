@@ -1,5 +1,6 @@
 import React, { useCallback, useReducer } from "react";
 import { Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 import "../assets/css/RegisterScreen.css";
 import FormImage from "../assets/images/form-image.png";
@@ -96,6 +97,8 @@ function RegisterScreen() {
               label="Name"
               id="name"
               required
+              minLength={3}
+              errorText="Please enter a valid name!"
             />
             <FormInput
               onInputChange={onInputChange}
@@ -104,30 +107,37 @@ function RegisterScreen() {
               id="email"
               email
               required
+              errorText="Invalid Email!"
             />
             <FormInput
               onInputChange={onInputChange}
               label="course"
               id="course"
               required
+              errorText="Course is required!"
             />
             <FormInput
               onInputChange={onInputChange}
               label="year"
               id="year"
               required
+              errorText="Year is required!"
             />
             <FormInput
               onInputChange={onInputChange}
               label="Phone"
               id="phone"
               required
+              minLength={10}
+              errorText="Invalid Phone Number!"
             />
             <FormInput
               onInputChange={onInputChange}
               label="whatsapp Phone"
               id="whatsappPhone"
               required
+              minLength={10}
+              errorText="Invalid WhatsApp Contact!"
             />
             <FormInput
               id="password"
@@ -135,11 +145,16 @@ function RegisterScreen() {
               label="password"
               inputType="password"
               required
+              minLength={4}
+              errorText="Password must be atleast 4 characters long!"
             />
           </form>
           <Button className="submit__button" onClick={formSubmitHandler}>
             Register
           </Button>
+          <span className="form__link">
+            Already have an account? <Link to="/login">Login Here</Link>
+          </span>
         </div>
       </div>
       {/* <div className="circle1"></div>

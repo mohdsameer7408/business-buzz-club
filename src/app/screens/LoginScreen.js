@@ -1,5 +1,6 @@
 import React, { useCallback, useReducer } from "react";
 import { Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 import "../assets/css/RegisterScreen.css";
 import "../assets/css/LoginScreen.css";
@@ -89,6 +90,7 @@ function LoginScreen() {
               id="email"
               email
               required
+              errorText="Invalid Email!"
             />
             <FormInput
               id="password"
@@ -96,11 +98,16 @@ function LoginScreen() {
               label="password"
               inputType="password"
               required
+              minLength={4}
+              errorText="Password must be atleast 4 characters long!"
             />
           </form>
           <Button className="submit__button" onClick={formSubmitHandler}>
             Log In
           </Button>
+          <span className="form__link">
+            Don't have an account? <Link to="/register">Register Here</Link>
+          </span>
         </div>
       </div>
     </div>

@@ -9,6 +9,7 @@
   --secondaryColor: #263a44;
   --footerColor: #1d2b42;
   --footerCopyColor: #031634;
+  --errorColor: #e80000;
 }
 
 body {

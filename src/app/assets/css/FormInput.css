@@ -1,4 +1,5 @@
 .input__container {
+  position: relative;
   display: flex;
   flex-direction: column;
   padding: 10px;
@@ -19,8 +20,29 @@
   outline-width: 0;
   border-bottom: 2px solid #033649;
   background: transparent;
+  padding-right: 30px;
 }
 
-.password__eye {
+.input__fieldError {
+  border-color: var(--errorColor);
+}
+
+.right__icon {
   margin-left: -22px;
+}
+
+.right__icon > .MuiSvgIcon-root {
+  cursor: pointer;
+}
+
+.right__iconCheck {
+  color: #009900;
+}
+
+.input__error {
+  position: absolute;
+  left: 10px;
+  bottom: -4px;
+  font-size: smaller;
+  color: var(--errorColor);
 }

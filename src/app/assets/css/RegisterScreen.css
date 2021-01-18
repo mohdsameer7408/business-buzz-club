@@ -52,7 +52,7 @@
   justify-content: center;
   align-items: center;
   width: 350px;
-  height: 655px;
+  height: 694px;
   background: linear-gradient(
     to right bottom,
     rgba(255, 255, 255, 0.6),
@@ -94,14 +94,20 @@
 
 .submit__button {
   margin-top: 10px !important;
-  margin-left: 50px !important;
+  margin-bottom: 10px !important;
+  margin-left: 10px !important;
   background-color: #263a44 !important;
   color: white !important;
-  width: 50%;
+  width: 250px;
 }
 
 .submit__button:hover {
   background-color: #000 !important;
+}
+
+.form__link {
+  margin-top: 10px;
+  margin-left: 10px;
 }
 
 @media only screen and (max-width: 501px) {

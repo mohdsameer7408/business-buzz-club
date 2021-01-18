@@ -72,6 +72,7 @@
 } */
 
 .event__details > a {
+  width: fit-content;
   font-size: 15px;
   font-weight: bold;
   color: #fff;

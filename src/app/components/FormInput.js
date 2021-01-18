@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer, useState } from "react";
-import { Visibility, VisibilityOff } from "@material-ui/icons";
+import { Visibility, VisibilityOff, CheckCircle } from "@material-ui/icons";
 
 import "../assets/css/FormInput.css";
 
@@ -85,7 +85,9 @@ function FormInput({
       <h3 className="label__field">{label.toUpperCase()}</h3>
       <div className="field__container">
         <input
-          className="input__field"
+          className={`input__field ${
+            touched && !isValid && "input__fieldError"
+          }`}
           required
           {...rest}
           type={
@@ -102,17 +104,25 @@ function FormInput({
           value={value}
           onChange={onValueChangeHandler}
         />
-        {id.toLowerCase().includes("password") && (
+        {id.toLowerCase().includes("password") ? (
           <div
-            className="password__eye"
+            className="right__icon"
             onClick={() => setIsPasswordVisible((prevState) => !prevState)}
           >
             {isPasswordVisible ? <Visibility /> : <VisibilityOff />}
           </div>
+        ) : (
+          isValid && (
+            <div className="right__icon">
+              <CheckCircle className="right__iconCheck" />
+            </div>
+          )
         )}
       </div>
       {touched && !isValid && (
-        <span>{errorText ? errorText : "Invalid Input!"}</span>
+        <span className="input__error">
+          {errorText ? errorText : "Invalid Input!"}
+        </span>
       )}
     </div>
   );
