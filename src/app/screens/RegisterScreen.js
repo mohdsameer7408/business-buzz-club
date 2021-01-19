@@ -1,15 +1,41 @@
 import React, { useCallback, useReducer } from "react";
 import { Button } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import "../assets/css/RegisterScreen.css";
 import FormImage from "../assets/images/form-image.png";
 import FormInput from "../components/FormInput";
+import { auth, db } from "../features/firebase";
 
 const UPDATE_FORM = "UPDATE_FORM";
+const RESET_FORM = "RESET_FORM";
+const initialState = {
+  values: {
+    name: "",
+    email: "",
+    course: "",
+    year: "",
+    phone: "",
+    whatsappPhone: "",
+    password: "",
+  },
+  validities: {
+    name: false,
+    email: false,
+    course: false,
+    year: false,
+    phone: false,
+    whatsappPhone: false,
+    password: false,
+  },
+  isFormValid: false,
+};
 
 const formReducer = (state, action) => {
   switch (action.type) {
+    case RESET_FORM:
+      return initialState;
+
     case UPDATE_FORM:
       const { id, value, isValid } = action.payload;
       const values = { ...state.values, [id]: value };
@@ -32,27 +58,8 @@ const formReducer = (state, action) => {
 };
 
 function RegisterScreen() {
-  const [formData, dispatchFormState] = useReducer(formReducer, {
-    values: {
-      name: "",
-      email: "",
-      course: "",
-      year: "",
-      phone: "",
-      whatsappPhone: "",
-      password: "",
-    },
-    validities: {
-      name: false,
-      email: false,
-      course: false,
-      year: false,
-      phone: false,
-      whatsappPhone: false,
-      password: false,
-    },
-    isFormValid: false,
-  });
+  const history = useHistory();
+  const [formData, dispatchFormState] = useReducer(formReducer, initialState);
 
   const onInputChange = useCallback(
     (id, value, isValid) => {
@@ -76,9 +83,31 @@ function RegisterScreen() {
         alert("Check form for errors!");
         return;
       }
-      console.log(formData);
+
+      try {
+        const { user } = await auth.createUserWithEmailAndPassword(
+          formData.values.email,
+          formData.values.password
+        );
+        const registrationData = {
+          uid: user.uid,
+          type: "user",
+          name: formData.values.name,
+          email: user.email,
+          course: formData.values.course,
+          year: formData.values.year,
+          phone: formData.values.phone,
+          whatsappPhone: formData.values.whatsappPhone,
+        };
+        await db.collection("users").doc(user.uid).set(registrationData);
+        // dispatch(signIn(formData.values));
+        dispatchFormState({ type: RESET_FORM });
+        history.replace("/");
+      } catch (error) {
+        alert(error.message);
+      }
     },
-    [formData]
+    [formData, history]
   );
 
   return (
@@ -145,13 +174,17 @@ function RegisterScreen() {
               label="password"
               inputType="password"
               required
-              minLength={4}
-              errorText="Password must be atleast 4 characters long!"
+              minLength={6}
+              errorText="Password must be atleast 6 characters long!"
             />
+            <Button
+              type="submit"
+              className="submit__button"
+              onClick={formSubmitHandler}
+            >
+              Register
+            </Button>
           </form>
-          <Button className="submit__button" onClick={formSubmitHandler}>
-            Register
-          </Button>
           <span className="form__link">
             Already have an account? <Link to="/login">Login Here</Link>
           </span>

@@ -1,16 +1,32 @@
 import React, { useCallback, useReducer } from "react";
 import { Button } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import "../assets/css/RegisterScreen.css";
 import "../assets/css/LoginScreen.css";
-import FormImage from "../assets/images/form-image.png";
+import FormImage from "../assets/images/form-login.png";
 import FormInput from "../components/FormInput";
+import { auth } from "../features/firebase";
 
 const UPDATE_FORM = "UPDATE_FORM";
+const RESET_FORM = "RESET_FORM";
+const initialState = {
+  values: {
+    email: "",
+    password: "",
+  },
+  validities: {
+    email: false,
+    password: false,
+  },
+  isFormValid: false,
+};
 
 const formReducer = (state, action) => {
   switch (action.type) {
+    case RESET_FORM:
+      return initialState;
+
     case UPDATE_FORM:
       const { id, value, isValid } = action.payload;
       const values = { ...state.values, [id]: value };
@@ -33,17 +49,8 @@ const formReducer = (state, action) => {
 };
 
 function LoginScreen() {
-  const [formData, dispatchFormState] = useReducer(formReducer, {
-    values: {
-      email: "",
-      password: "",
-    },
-    validities: {
-      email: false,
-      password: false,
-    },
-    isFormValid: false,
-  });
+  const history = useHistory();
+  const [formData, dispatchFormState] = useReducer(formReducer, initialState);
 
   const onInputChange = useCallback(
     (id, value, isValid) => {
@@ -67,9 +74,19 @@ function LoginScreen() {
         alert("Check form for errors!");
         return;
       }
-      console.log(formData);
+
+      try {
+        await auth.signInWithEmailAndPassword(
+          formData.values.email,
+          formData.values.password
+        );
+        dispatchFormState({ type: RESET_FORM });
+        history.replace("/");
+      } catch (error) {
+        alert(error.message);
+      }
     },
-    [formData]
+    [formData, dispatchFormState, history]
   );
 
   return (
@@ -98,13 +115,17 @@ function LoginScreen() {
               label="password"
               inputType="password"
               required
-              minLength={4}
-              errorText="Password must be atleast 4 characters long!"
+              minLength={6}
+              errorText="Password must be atleast 6 characters long!"
             />
+            <Button
+              type="submit"
+              className="submit__button"
+              onClick={formSubmitHandler}
+            >
+              Log In
+            </Button>
           </form>
-          <Button className="submit__button" onClick={formSubmitHandler}>
-            Log In
-          </Button>
           <span className="form__link">
             Don't have an account? <Link to="/register">Register Here</Link>
           </span>
