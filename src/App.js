@@ -9,6 +9,7 @@ import EventsScreen from "./app/screens/EventsScreen";
 import LoginScreen from "./app/screens/LoginScreen";
 import RegisterScreen from "./app/screens/RegisterScreen";
 import ProfileScreen from "./app/screens/ProfileScreen";
+import AddEvent from "./app/screens/AddEvent";
 import PrivateRoute from "./app/components/PrivateRoute";
 import ProtectedRoute from "./app/components/ProtectedRoute";
 import { auth, db } from "./app/features/firebase";
@@ -39,6 +40,9 @@ function App() {
       <div className="app">
         <Header />
         <Switch>
+          <PrivateRoute path="/event/create">
+            <AddEvent />
+          </PrivateRoute>
           <PrivateRoute path="/profile">
             <ProfileScreen />
           </PrivateRoute>

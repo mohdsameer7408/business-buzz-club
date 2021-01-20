@@ -1,4 +1,4 @@
-import React, { useCallback, useReducer } from "react";
+import React, { useCallback, useReducer, useState } from "react";
 import { Button } from "@material-ui/core";
 import { Link, useHistory } from "react-router-dom";
 
@@ -60,6 +60,7 @@ const formReducer = (state, action) => {
 function RegisterScreen() {
   const history = useHistory();
   const [formData, dispatchFormState] = useReducer(formReducer, initialState);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onInputChange = useCallback(
     (id, value, isValid) => {
@@ -85,6 +86,7 @@ function RegisterScreen() {
       }
 
       try {
+        setIsLoading(true);
         const { user } = await auth.createUserWithEmailAndPassword(
           formData.values.email,
           formData.values.password
@@ -102,8 +104,10 @@ function RegisterScreen() {
         await db.collection("users").doc(user.uid).set(registrationData);
         // dispatch(signIn(formData.values));
         dispatchFormState({ type: RESET_FORM });
+        setIsLoading(false);
         history.replace("/");
       } catch (error) {
+        setIsLoading(false);
         alert(error.message);
       }
     },
@@ -181,8 +185,9 @@ function RegisterScreen() {
               type="submit"
               className="submit__button"
               onClick={formSubmitHandler}
+              disabled={isLoading}
             >
-              Register
+              {isLoading ? "Registering..." : "Register"}
             </Button>
           </form>
           <span className="form__link">

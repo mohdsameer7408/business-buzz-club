@@ -1,4 +1,4 @@
-import React, { useCallback, useReducer } from "react";
+import React, { useCallback, useReducer, useState } from "react";
 import { Button } from "@material-ui/core";
 import { Link, useHistory } from "react-router-dom";
 
@@ -51,6 +51,7 @@ const formReducer = (state, action) => {
 function LoginScreen() {
   const history = useHistory();
   const [formData, dispatchFormState] = useReducer(formReducer, initialState);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onInputChange = useCallback(
     (id, value, isValid) => {
@@ -76,13 +77,16 @@ function LoginScreen() {
       }
 
       try {
+        setIsLoading(true);
         await auth.signInWithEmailAndPassword(
           formData.values.email,
           formData.values.password
         );
         dispatchFormState({ type: RESET_FORM });
+        setIsLoading(false);
         history.replace("/");
       } catch (error) {
+        setIsLoading(false);
         alert(error.message);
       }
     },
@@ -122,8 +126,9 @@ function LoginScreen() {
               type="submit"
               className="submit__button"
               onClick={formSubmitHandler}
+              disabled={isLoading}
             >
-              Log In
+              {isLoading ? "Logging in..." : "Log In"}
             </Button>
           </form>
           <span className="form__link">

@@ -8,8 +8,6 @@
   border-radius: 20px;
   padding: 60px 20px;
   overflow: hidden;
-  background: rgba(0, 0, 0, 0.7) url("https://picsum.photos/400/500")
-    center/cover fixed no-repeat;
   background-blend-mode: darken;
   color: #fff;
 }
@@ -57,6 +55,12 @@
   color: #ccc;
   font-size: 16px;
   font-weight: bold;
+}
+
+.event__configButtons {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
 }
 
 .register__now {
