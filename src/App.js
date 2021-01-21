@@ -14,6 +14,7 @@ import PrivateRoute from "./app/components/PrivateRoute";
 import ProtectedRoute from "./app/components/ProtectedRoute";
 import { auth, db } from "./app/features/firebase";
 import { signIn, signOutAsync } from "./app/features/authSlice";
+import { setEvents } from "./app/features/eventsSlice";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,11 +36,26 @@ function App() {
     return unsubscribe;
   }, [dispatch]);
 
+  useEffect(() => {
+    const unsubscribe = db
+      .collection("events")
+      .onSnapshot((snapshot) =>
+        dispatch(
+          setEvents(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })))
+        )
+      );
+
+    return unsubscribe;
+  }, [dispatch]);
+
   return (
     <Router>
       <div className="app">
         <Header />
         <Switch>
+          <PrivateRoute path="/event/edit/:eventId">
+            <AddEvent />
+          </PrivateRoute>
           <PrivateRoute path="/event/create">
             <AddEvent />
           </PrivateRoute>

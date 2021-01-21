@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 import "../assets/css/Gallery.css";
+import { selectEvents } from "../features/eventsSlice";
 
 function Gallery() {
+  const prevEvents = [...useSelector(selectEvents)].reverse().slice(0, 6);
   const [isGalleryReached, setIsGalleryReached] = useState(false);
 
   useEffect(() => {
@@ -33,30 +36,29 @@ function Gallery() {
         </p>
       </div>
       <div className="image__cards">
-        {Array(6)
-          .fill()
-          .map((_, index) => (
+        {prevEvents.map((event) => (
+          <div
+            style={{ margin: isGalleryReached ? "20px" : 0 }}
+            key={event.id}
+            className="image__cardWrapper"
+          >
             <div
-              style={{ margin: isGalleryReached ? "20px" : 0 }}
-              key={index}
-              className="image__cardWrapper"
+              style={{
+                backgroundImage: `url(${event.poster})`,
+              }}
+              className="image__card"
             >
-              <div
-                style={{
-                  backgroundImage: `url("https://picsum.photos/400/500")`,
-                }}
-                className="image__card"
-              >
-                <div className="image__description">
-                  <h1>Title</h1>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Sunt laboriosam voluptatibus aliquid.
-                  </p>
-                </div>
+              <div className="image__description">
+                <h1>{event.title}</h1>
+                <p>
+                  {event.description.length > 200
+                    ? `${event.description.slice(0, 200)}...`
+                    : event.description}
+                </p>
               </div>
             </div>
-          ))}
+          </div>
+        ))}
       </div>
     </div>
   );

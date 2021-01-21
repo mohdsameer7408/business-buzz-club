@@ -4,9 +4,13 @@ import { Visibility, VisibilityOff, CheckCircle } from "@material-ui/icons";
 import "../assets/css/FormInput.css";
 
 const INPUT_CHANGE = "INPUT_CHANGE";
+const SET_INPUT = "SET_INPUT";
 
 const inputReducer = (state, action) => {
   switch (action.type) {
+    case SET_INPUT:
+      return { ...state, ...action.payload };
+
     case INPUT_CHANGE:
       const { value, isValid } = action.payload;
       return {
@@ -42,6 +46,17 @@ function FormInput({
     isValid: initiallyValid ? initiallyValid : false,
     touched: false,
   });
+
+  useEffect(() => {
+    dispatch({
+      type: SET_INPUT,
+      payload: {
+        value: initialValue,
+        isValid: initiallyValid,
+        touched: false,
+      },
+    });
+  }, [initialValue, initiallyValid]);
 
   useEffect(() => {
     onInputChange(id, value, isValid);

@@ -1,17 +1,45 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import moment from "moment";
+import { useHistory } from "react-router-dom";
 
 import "../assets/css/Event.css";
 import { selectUser } from "../features/authSlice";
+import { db } from "../features/firebase";
 
 function Event({ eventData }) {
   const user = useSelector(selectUser);
+  const history = useHistory();
+  const [participants, setParticipants] = useState([]);
+
+  useEffect(() => {
+    const unsubscribe = db
+      .collection("events")
+      .doc(eventData.id)
+      .collection("participants")
+      .onSnapshot((snapshot) =>
+        setParticipants(snapshot.docs.map((doc) => doc.id))
+      );
+
+    return unsubscribe;
+  }, [eventData.id]);
 
   const enrollInEventHandler = (event) => {
     event.preventDefault();
-    console.log("Enrolled");
+    db.collection("events")
+      .doc(eventData.id)
+      .collection("participants")
+      .doc(user.uid)
+      .set(user);
+  };
+
+  const editEvent = () => {
+    history.push(`/event/edit/${eventData.id}`);
+  };
+
+  const deleteEvent = () => {
+    db.collection("events").doc(eventData.id).delete();
   };
 
   return (
@@ -29,31 +57,39 @@ function Event({ eventData }) {
         <p className="event_description">{eventData.description}</p>
         <span>
           Date and time -{" "}
-          {moment(eventData.dateTime).format("MMM Do YYYY, HH:mm")}
+          {moment(new Date(eventData.dateTime)).format("MMM Do YYYY, HH:mm")}
         </span>
         <a href={eventData.meetUrl} target="_blank" rel="noreferrer">
           Google Meet Url
         </a>
         {user?.type.toLowerCase() === "admin" && (
           <div className="event__configButtons">
-            <Button className="hero__button">Edit</Button>
-            <Button className="hero__button">Delete</Button>
+            <Button className="hero__button" onClick={editEvent}>
+              Edit
+            </Button>
+            <Button className="hero__button" onClick={deleteEvent}>
+              Delete
+            </Button>
           </div>
         )}
         <Button
           className="hero__button register__now"
           disabled={
             user
-              ? eventData.dateTime > new Date().toString()
-                ? false
+              ? new Date(eventData.dateTime) > new Date()
+                ? participants.some((participant) => participant === user.uid)
+                  ? true
+                  : false
                 : true
               : true
           }
           onClick={enrollInEventHandler}
         >
           {user
-            ? eventData.dateTime > new Date().toString()
-              ? "Register Now"
+            ? new Date(eventData.dateTime) > new Date()
+              ? participants.some((participant) => participant === user.uid)
+                ? "You have registered"
+                : "Register Now"
               : "Registrations are over"
             : "Sign In to register"}
         </Button>

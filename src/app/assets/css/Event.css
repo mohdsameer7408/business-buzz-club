@@ -27,7 +27,7 @@
 .event__poster > img {
   width: 70%;
   max-width: 401px;
-  height: 530px;
+  height: 560px;
   object-fit: cover;
   border-radius: 20px;
   transition: transform 0.3s ease;
